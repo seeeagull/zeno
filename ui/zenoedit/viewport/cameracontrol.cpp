@@ -355,7 +355,20 @@ void CameraControl::fakeWheelEvent(QWheelEvent *event) {
         float temp = getDisPlane() + delta * 0.05;
         setDisPlane(temp >= 0.05 ? temp : 0.05);
     } else {
-        setRadius(getRadius() * scale);
+        zeno::log_info("radius: {}", getRadius());
+        float limit = 0.2;
+        if (getRadius() > 0) {
+            if (dy > 0 && getRadius() < limit) {
+                setRadius(-getRadius());
+            }
+            setRadius(getRadius() * scale);
+        }
+        else {
+            if (dy < 0 && getRadius() > -limit) {
+                setRadius(-getRadius());
+            }
+            setRadius(getRadius() / scale);
+        }
     }
     updatePerspective();
 
