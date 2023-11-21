@@ -3,7 +3,4 @@ target_sources(zeno PRIVATE
     CartesianField.cpp
     IntrinsicFaceTangentBundle.h
     IntrinsicFaceTangentBundle.cpp
-    IterativeRoundingTraits.h
-    SIInitialSolutionTraits.h
 )
-#add_subdirectory(SaddlePoint)
