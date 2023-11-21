@@ -14,7 +14,6 @@
 #include <unordered_map>
 #include <iostream>
 #include <Eigen/Core>
-#include <Eigen/Sparse>
 #include "../SurfaceMesh.h"
 
 
@@ -42,14 +41,12 @@ namespace zeno::directional {
         Eigen::VectorXcf connection;                  // #V, metric connection between adjacent spaces
 
         IntrinsicFaceTangentBundle(){}
-        IntrinsicFaceTangentBundle(zeno::pmp::SurfaceMesh* surface_mesh);
         ~IntrinsicFaceTangentBundle(){}
 
-        // projecting intrinsic to extrinsic
-        Eigen::MatrixXf project_to_extrinsic(const Eigen::VectorXi& tan_spaces, const Eigen::MatrixXf& int_directionals) const;
+        void init(const SurfaceMesh& _mesh, const std::vector<vec3f>& pos, const std::vector<vec3f>& lines);
 
-        // projecting extrinsic to intrinsic
-        Eigen::MatrixXf project_to_intrinsic(const Eigen::VectorXi& tan_spaces, const Eigen::MatrixXf& ext_directionals) const;
+        // projecting intrinsic to extrinsic
+        Eigen::MatrixXf project_to_extrinsic(const Eigen::VectorXi& tangentSpaces, const Eigen::MatrixXf& intDirectionals) const;
     
     private:
     // Construct a dual tree (tris as verts and adjacent edges as connecting edges) from a mesh.
