@@ -12,7 +12,7 @@ namespace pmp {
 SurfaceMesh::SurfaceMesh(std::shared_ptr<zeno::PrimitiveObject> prim_obj,
                          std::string line_pick_tag)
                          : line_pick_tag_(line_pick_tag) {
-    prim = prim;
+    prim = prim_obj;
     vconn_.clear();
     hconn_.clear();
     fconn_.clear();
