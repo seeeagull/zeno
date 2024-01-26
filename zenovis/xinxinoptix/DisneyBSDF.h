@@ -638,11 +638,13 @@ namespace DisneyBSDF{
         prd->fromDiff = false;
         if(mat.isHair>0.5f){
           prd->fromDiff = true;
-          wi = BRDFBasics::CosineSampleHemisphere(r1, r2);
+          wi = SampleScatterDirection(prd->seed) ;
           vec3 wo_t = normalize(vec3(0.0f,wo.y,wo.z));
           vec3 wi_t = normalize(vec3(0.0f,wi.y,wi.z));
           float Phi = acos(dot(wo_t,wi_t));
-          reflectance = HairBSDF::EvaluteHair(wi.x,dot(wi_t,wi),wo.x,dot(wo_t,wo),Phi,wi.z,1.55f,mat.basecolor,mat.roughness,0.1f,2.0f);
+          vec3 extinction = CalculateExtinction(mat.sssParam,1.0f);
+          reflectance = HairBSDF::EvaluteHair(wi.x,dot(wi_t,wi),wo.x,dot(wo_t,wo),Phi,wi.z,1.55f,extinction,mat.basecolor,mat.roughness,0.9f,2.0f);
+                    
           isSS = false;
           tbn.inverse_transform(wi);
           wi = normalize(wi);
@@ -652,7 +654,7 @@ namespace DisneyBSDF{
           }
           tbn.inverse_transform(wo);
           float pdf, pdf2;
-          pdf = 1 / M_PIf / 2;
+          pdf = 1 / M_PIf / 4;
           vec3 rd, rs, rt;
           fPdf = pdf>1e-5?pdf:0.0f;
           reflectance = pdf>1e-5?reflectance:vec3(0.0f);
