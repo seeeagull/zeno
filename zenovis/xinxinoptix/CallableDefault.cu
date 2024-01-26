@@ -75,6 +75,7 @@ extern "C" __device__ MatOutput __direct_callable__evalmat(cudaTextureObject_t z
     float mat_transDistance = 0.0f;
     vec3 mat_transScatterColor = vec3(1.0f,1.0f,1.0f);
     float mat_ior = 1.0f;
+    float mat_isHair = 0.0f;
 
     float mat_diffraction = 0.0f;
     vec3  mat_diffractColor = vec3(0.0f);
@@ -131,6 +132,7 @@ extern "C" __device__ MatOutput __direct_callable__evalmat(cudaTextureObject_t z
     float mat_transDistance = 0.0f;
     vec3 mat_transScatterColor = vec3(1.0f,1.0f,1.0f);
     float mat_ior = 1.0f;
+    float mat_isHair = 0.0f;
 
     float mat_diffraction = 0.0f;
     vec3  mat_diffractColor = vec3(0.0f);
@@ -196,6 +198,7 @@ extern "C" __device__ MatOutput __direct_callable__evalmat(cudaTextureObject_t z
     mats.thin = mat_thin;
     mats.doubleSide = mat_doubleSide;
     mats.shadowReceiver = mat_shadowReceiver;
+    mats.isHair = mat_isHair;
 
     mats.smoothness = mat_smoothness;
     mats.sssFxiedRadius = sssFxiedRadius;
