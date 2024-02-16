@@ -85,7 +85,7 @@ struct QuadMeshing : INode {
         zeno::directional::IntrinsicFaceTangentBundle ftb(meshWhole);
         zeno::directional::CartesianField rawField, combedField;
 
-        bool read_field = read_raw_field("/home/yangkai/Repos/jyz/code/Directional/tutorial/shared/horsers-cf.rawfield", ftb, N, rawField);
+        bool read_field = read_raw_field("/home/seeeagull/Downloadshorsers-cf.rawfield", ftb, N, rawField);
         
         //combing and cutting
         rawField.principal_matching();
